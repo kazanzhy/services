@@ -1,0 +1,15 @@
+apache-airflow[password,postgres,mongo,spark]==2.0.0
+bcrypt
+flask-bcrypt
+gspread
+Jinja2
+oauth2client
+openpyxl
+pandas
+pymongo
+psycopg2
+pyspark
+pytest
+setuptools
+statsmodels
+sqlalchemy

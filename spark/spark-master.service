@@ -1,0 +1,25 @@
+[Unit]
+Description=Apache Spark Master
+After=network.target
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=forking
+User=amon
+Group=wheel
+Environment=JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.11.0.9-0.el8_3.x86_64 
+Environment=CLASSPATH=/usr/local/spark/jars
+Environment=SPARK_HOME=/usr/local/spark
+Environment=SPARK_DAEMON_CLASSPATH=/usr/local/spark/jars
+Environment=SPARK_LOG_DIR=/home/amon/amon.platform/spark/logs
+Environment=SPARK_PID_DIR=/home/amon/amon.platform/spark/pids
+Environment=SPARK_WORKER_DIR=/home/amon/amon.platform/spark/workers
+Environment=SPARK_MASTER_WEBUI_PORT=7070
+Environment=PYSPARK_PYTHON=/usr/bin/python3
+ExecStart=/usr/local/spark/sbin/start-master.sh
+ExecStop=/usr/local/spark/sbin/stop-master.sh
+Restart=always
+
+

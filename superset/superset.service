@@ -1,0 +1,26 @@
+[Unit]
+Description=Apache Superset
+After=network.target postgresql.service redis.service
+Wants=postgresql.service redis.service
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=forking
+User=amon
+Group=wheel
+WorkingDirectory=/home/amon/amon.platform/superset
+Environment=PATH=$PATH:/home/amon.platform/venv_superset/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Environment=PYTHONPATH=$PYTHONPATH:/home/amon/amon.platform/superset
+Environment=SUPERSET_HOME=/home/amon/amon.platform/superset
+Environment=FLASK_APP=superset.app:create_app()
+Environment=VENV=/home/amon/amon.platform/venv_superset
+ExecStart=/bin/bash -c 'source $VENV/bin/activate && gunicorn -c $SUPERSET_HOME/gunicorn_config.py "superset.app:create_app()" && deactivate'
+ExecStop=/bin/pkill -f "superset.app"
+Restart=always
+RestartSec=2
+TimeoutSec=30
+
+
+

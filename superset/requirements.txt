@@ -1,0 +1,9 @@
+apache-superset
+cryptography
+gunicorn[gevent]
+pystan<3
+fbprophet
+#psycopg2-binary	# Test
+psycopg2 		# Production: install libpq-dev
+Pillow
+redis
